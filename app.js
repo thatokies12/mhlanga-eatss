@@ -1,6 +1,7 @@
-const express = require('express');
+const express = require('express')
 const cors = require('cors');
-const bodyParser = require('body-parser')
+const path = require('path');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 const db = require('./config/db');
 
@@ -17,8 +18,7 @@ app.use('/api', require('./routes/index'));
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(authRoutes);
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
 }); 
