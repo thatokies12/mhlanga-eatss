@@ -2,23 +2,20 @@ const express = require('express')
 const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
+const authRoutes = require('./routes/auth.routes');
+const driverRoutes = require('./routes/driver.routes');
 require('dotenv').config();
-const db = require('./config/db');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Routes
-app.use('/api', require('./routes/index'));
-
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-}); 
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.use('/api', authRoutes);
+app.use('/api/driver', driverRoutes);
+
+app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

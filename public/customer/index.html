@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KwaMhlanga Eats - Food & Grocery Delivery</title>
-    <script src="./assets/js/tailwindCSS.js"></script>
+    <script src="./tailwindCSS.js"></script>
     <script>tailwind.config={theme:{extend:{colors:{primary:'crimson',secondary:'#2EC4B6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/icons/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
     <style>
         :where([class^="ri-"])::before { content: "\f3c2"; }
         body {
@@ -136,7 +136,7 @@
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                             <div class="w-5 h-5 flex items-center justify-center text-gray-400">
-                                <i class="fa fa-search"></i>
+                                <i class="ri-search-line"></i>
                             </div>
                         </div>
                         <input type="text" class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Search for restaurants or groceries...">
@@ -146,21 +146,21 @@
                 <!-- Right Navigation -->
                 <div class="flex items-center space-x-4">
                     <button class="relative w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary">
-                        <i class="fa fa-bell"></i>
+                        <i class="ri-notification-3-line ri-lg"></i>
                         <span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
                     </button>
                     <button class="relative w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary">
-                        <i class="fa fa-shopping-cart"></i>
+                        <i class="ri-shopping-cart-2-line ri-lg"></i>
                         <span class="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-xs rounded-full flex items-center justify-center">3</span>
                     </button>
                     <div class="relative">
                         <button id="profileButton" class="flex items-center space-x-2 focus:outline-none">
                             <div class="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
-                                <img src="" alt="Profile" class="w-full h-full object-cover">
+                                <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20South%20African%20person%20with%20a%20neutral%20expression%2C%20well-groomed%20appearance%2C%20against%20a%20simple%20light%20background.%20The%20image%20should%20be%20high%20quality%2C%20showing%20just%20the%20head%20and%20shoulders%2C%20with%20good%20lighting%20that%20highlights%20facial%20features%20naturally&width=200&height=200&seq=2&orientation=squarish" alt="Profile" class="w-full h-full object-cover">
                             </div>
                             <span class="hidden md:block text-sm font-medium">Kgopotso Makua</span>
                             <div class="w-4 h-4 flex items-center justify-center">
-                                <i class="fa fa-angle-down"></i>
+                                <i class="ri-arrow-down-s-line"></i>
                             </div>
                         </button>
                         <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg py-1 hidden">
@@ -179,12 +179,12 @@
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between py-3 border-t border-gray-100">
                 <div class="flex items-center space-x-2 text-sm">
                     <div class="w-4 h-4 flex items-center justify-center text-primary">
-                        <i class="fa fa-location-dot"></i>
+                        <i class="ri-map-pin-line"></i>
                     </div>
                     <button class="font-medium flex items-center">
                         KwaMhlanga Central, 1022
                         <div class="w-4 h-4 flex items-center justify-center ml-1">
-                            <i class="fa fa-angle-down"></i>
+                            <i class="ri-arrow-down-s-line"></i>
                         </div>
                     </button>
                 </div>
@@ -207,13 +207,13 @@
                 <div class="flex flex-col sm:flex-row gap-4">
                     <button class="px-6 py-3 bg-primary text-white rounded-button font-medium text-lg flex items-center justify-center whitespace-nowrap">
                         <div class="w-5 h-5 flex items-center justify-center mr-2">
-                            <i class="fa fa-utensils"></i>
+                            <i class="ri-restaurant-line"></i>
                         </div>
                         Order Food Now
                     </button>
                     <button class="px-6 py-3 bg-white text-gray-800 rounded-button font-medium text-lg flex items-center justify-center whitespace-nowrap">
                         <div class="w-5 h-5 flex items-center justify-center mr-2">
-                            <i class="fa fa-basket-shopping"></i>
+                            <i class="ri-shopping-basket-2-line"></i>
                         </div>
                         Shop Groceries
                     </button>
@@ -255,7 +255,7 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
-                                <i class="fa fa-star"></i>
+                                <i class="ri-star-fill"></i>
                             </div>
                             <span class="mr-2">4.8</span>
                             <span class="mr-2">(124)</span>
@@ -263,11 +263,11 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-500">
                             <div class="w-4 h-4 flex items-center justify-center mr-1">
-                                <i class="fa fa-timer"></i>
+                                <i class="ri-time-line"></i>
                             </div>
                             <span class="mr-3">25-35 min</span>
                             <div class="w-4 h-4 flex items-center justify-center mr-1">
-                                <i class="fa fa-coin"></i>
+                                <i class="ri-coin-line"></i>
                             </div>
                             <span>R15 delivery</span>
                         </div>
@@ -286,7 +286,7 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
-                                <i class="fa fa-star"></i>
+                                <i class="ri-star-fill"></i>
                             </div>
                             <span class="mr-2">4.6</span>
                             <span class="mr-2">(89)</span>
@@ -317,7 +317,7 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
-                                <i class="fa fa-star"></i>
+                                <i class="ri-star-fill"></i>
                             </div>
                             <span class="mr-2">4.5</span>
                             <span class="mr-2">(76)</span>
@@ -348,7 +348,7 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
-                                <i class="fa fa-star"></i>
+                                <i class="ri-star-fill"></i>
                             </div>
                             <span class="mr-2">4.7</span>
                             <span class="mr-2">(102)</span>
@@ -387,7 +387,7 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
-                                <i class="fa fa-star"></i>
+                                <i class="ri-star-fill"></i>
                             </div>
                             <span class="mr-2">4.9</span>
                             <span class="mr-2">(156)</span>
@@ -418,7 +418,7 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
-                                <i class="fa fa-star"></i>
+                                <i class="ri-star-fill"></i>
                             </div>
                             <span class="mr-2">4.5</span>
                             <span class="mr-2">(98)</span>
@@ -449,7 +449,7 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
-                                <i class="fa fa-star"></i>
+                                <i class="ri-star-fill"></i>
                             </div>
                             <span class="mr-2">4.7</span>
                             <span class="mr-2">(67)</span>
@@ -480,7 +480,7 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
-                                <i class="fa fa-star"></i>
+                                <i class="ri-star-fill"></i>
                             </div>
                             <span class="mr-2">4.8</span>
                             <span class="mr-2">(42)</span>
@@ -510,7 +510,7 @@
                 <div class="text-center">
                     <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                         <div class="w-8 h-8 flex items-center justify-center text-primary">
-                            <i class="fa fa-shop"></i>
+                            <i class="ri-store-3-line ri-2x"></i>
                         </div>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Choose a Restaurant or Store</h3>
@@ -519,7 +519,7 @@
                 <div class="text-center">
                     <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                         <div class="w-8 h-8 flex items-center justify-center text-primary">
-                            <i class="fa fa-basket-shopping"></i>
+                            <i class="ri-shopping-basket-2-line ri-2x"></i>
                         </div>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Select Your Items</h3>
@@ -528,7 +528,7 @@
                 <div class="text-center">
                     <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                         <div class="w-8 h-8 flex items-center justify-center text-primary">
-                            <i class="fa fa-bicycle"></i>
+                            <i class="ri-bike-line ri-2x"></i>
                         </div>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Get Fast Delivery</h3>
@@ -557,7 +557,7 @@
                         </button>
                         <button class="flex items-center justify-center px-6 py-3 bg-gray-900 text-white rounded-button whitespace-nowrap">
                             <div class="w-6 h-6 flex items-center justify-center mr-2">
-                                <i class="fa fa-google-play"></i>
+                                <i class="ri-google-play-fill"></i>
                             </div>
                             <div class="text-left">
                                 <div class="text-xs">Get it on</div>
@@ -583,7 +583,7 @@
                     <div class="bg-white p-6 rounded-lg shadow-sm">
                         <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                             <div class="w-6 h-6 flex items-center justify-center text-primary">
-                                <i class="fa fa-shop"></i>
+                                <i class="ri-store-2-line"></i>
                             </div>
                         </div>
                         <h3 class="text-xl font-semibold mb-2">Restaurant Owners</h3>
@@ -593,7 +593,7 @@
                     <div class="bg-white p-6 rounded-lg shadow-sm">
                         <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                             <div class="w-6 h-6 flex items-center justify-center text-primary">
-                                <i class="fa fa-basket-shopping"></i>
+                                <i class="ri-shopping-bag-3-line"></i>
                             </div>
                         </div>
                         <h3 class="text-xl font-semibold mb-2">Store Owners</h3>
@@ -603,7 +603,7 @@
                     <div class="bg-white p-6 rounded-lg shadow-sm">
                         <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                             <div class="w-6 h-6 flex items-center justify-center text-primary">
-                                <i class="fa fa-bicycle"></i>
+                                <i class="ri-bike-line"></i>
                             </div>
                         </div>
                         <h3 class="text-xl font-semibold mb-2">Delivery Drivers</h3>
@@ -624,13 +624,13 @@
                     <p class="text-gray-400 mb-4">Connecting you to the best local food and grocery stores in KwaMhlanga.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
-                            <i class="fab fa-facebook"></i>
+                            <i class="ri-facebook-fill"></i>
                         </a>
                         <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
-                            <i class="fab fa-twitter"></i>
+                            <i class="ri-twitter-x-fill"></i>
                         </a>
                         <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
-                            <i class="fab fa-instagram"></i>
+                            <i class="ri-instagram-line"></i>
                         </a>
                     </div>
                 </div>
@@ -658,19 +658,19 @@
                     <ul class="space-y-2">
                         <li class="flex items-start">
                             <div class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-gray-400">
-                                <i class="fa fa-location"></i>
+                                <i class="ri-map-pin-line"></i>
                             </div>
                             <span class="text-gray-400">123 Main Street, KwaMhlanga, 1022</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 flex items-center justify-center mr-2 text-gray-400">
-                                <i class="fa fa-phone"></i>
+                                <i class="ri-phone-line"></i>
                             </div>
                             <span class="text-gray-400">+27 12 345 6789</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 flex items-center justify-center mr-2 text-gray-400">
-                                <i class="fa fa-mail"></i>
+                                <i class="ri-mail-line"></i>
                             </div>
                             <span class="text-gray-400">info@kwamhlangaeats.co.za</span>
                         </li>
@@ -685,13 +685,13 @@
                         <a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Terms of Service</a>
                         <div class="flex items-center space-x-2">
                             <div class="w-6 h-6 flex items-center justify-center text-gray-400">
-                                <i class="fa fa-visa"></i>
+                                <i class="ri-visa-line"></i>
                             </div>
                             <div class="w-6 h-6 flex items-center justify-center text-gray-400">
-                                <i class="fa fa-mastercard"></i>
+                                <i class="ri-mastercard-line"></i>
                             </div>
                             <div class="w-6 h-6 flex items-center justify-center text-gray-400">
-                                <i class="fa fa-paypal"></i>
+                                <i class="ri-paypal-line"></i>
                             </div>
                         </div>
                     </div>
