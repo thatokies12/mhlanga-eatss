@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2025 at 07:34 AM
+-- Generation Time: Jul 07, 2025 at 05:08 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -137,14 +137,11 @@ CREATE TABLE `order_items` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `store_id` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
+  `store_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `description` text,
-  `price` decimal(10,2) DEFAULT NULL,
-  `image_url` varchar(255) DEFAULT NULL,
-  `stock_quantity` int(11) DEFAULT '0',
-  `is_available` tinyint(1) DEFAULT '1',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `price` decimal(10,2) NOT NULL,
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -155,12 +152,11 @@ CREATE TABLE `products` (
 
 CREATE TABLE `stores` (
   `id` int(11) NOT NULL,
+  `manager_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `description` text,
-  `location` varchar(255) DEFAULT NULL,
-  `hours` varchar(100) DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT '1',
-  `manager_id` int(11) DEFAULT NULL
+  `location` text,
+  `contact_info` varchar(100) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -183,7 +179,12 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `role`, `password`) VALUES
 (1, 'Blavkson', 'test@code', 'driver', '$2b$10$QQ/1ODtrwCG1R.GKVMHPteOfdNqEiJYuSSmjdRrgUn0GGWofXdMM.'),
-(2, 'thato', 'teat@code', 'customer', '$2b$10$SUKrXNNAiXkA0J1wsd3sE.jIMDo9tiCfIlZxfR2TE8W3Mcovugf5m');
+(2, 'thato', 'teat@code', 'customer', '$2b$10$SUKrXNNAiXkA0J1wsd3sE.jIMDo9tiCfIlZxfR2TE8W3Mcovugf5m'),
+(3, 'milly', 'Kgopotsomak@outlook.com', 'admin', '$2b$10$8b6dtODjr0dPdXEFOJZeCOXNRY19JTQdbLk6oktk4pZlZg.jGpayW'),
+(8, 'Bkayz', 'code@tz', 'manager', '$2b$10$SQfv9erv3wKF4WQMQB.zH.DAjt5aixxut7KqVHecn.VPXrO9Is5MK'),
+(9, 'kjay', 'kjay@test', 'manager', '$2b$10$pNiVRWcJHhBKYLKcJnd9.e.DFeA9KAPfzF4Tz44EVklFNtLZWPTV2'),
+(10, 'mkay', 'mak@test', 'manager', '$2b$10$id1SbRLQ3Ai5cf0Zi0QL4eSNUy0LLTsKX/sxmVM3FybExMBaWz6rG'),
+(11, 'temm', 'temm@drive', 'driver', '$2b$10$cLyI2SbCnsQ1sGS1Mw5rtuso9KQZs3sBL2Iv61nO9Ek3vIKkXh5iW');
 
 --
 -- Indexes for dumped tables
@@ -311,7 +312,7 @@ ALTER TABLE `stores`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

@@ -1,11 +1,24 @@
 const express = require('express');
-const router = express.Router();
-const storeController = require('../controllers/store.controller');
+const multer = require('multer');
+const path = require('path');
+const managerController = require('../controllers/storeController');
 
-router.post('/', storeController.createStore);
-router.get('/', storeController.getAllStores);
-router.get('/:id', storeController.getStoreById);
-router.put('/:id', storeController.updateStore);
-router.delete('/:id', storeController.deleteStore);
+const router = express.Router();
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, 'uploads/'),
+    filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
+});
+
+const upload = multer({ storage });
+
+router.post('/register-store', upload.single('image'), managerControllerController.registerStore);
+router.get('/stores/:managerId', managerController.getStores);
+router.delete('/delete-store/:id', managerController.deleteStore);
+router.get('/store/:id', managerController.getStoreById);
+router.put('/update-store/:id', upload.single('image'), managerController.updateStore);
+
+
+
 
 module.exports = router;

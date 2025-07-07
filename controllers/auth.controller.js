@@ -4,6 +4,7 @@ const db = require('../config/db');
 
 exports.register = (req, res) => {
     const { username, email, role, password } = req.body;
+    console.log('[signup attempt]', { username, role });
 
     // 1. Check if username already exists
     User.findByUsername(username, db, (err, results) => {
