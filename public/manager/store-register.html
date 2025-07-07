@@ -1,0 +1,34 @@
+<form id="storeForm" enctype="multipart/form-data">
+  <input type="hidden" name="managerId" value="2" />
+  <input type="text" name="name" placeholder="Restaurant Name" required />
+  <input type="text" name="location" placeholder="Location" />
+  <input type="text" name="contactInfo" placeholder="Contact Info" />
+  <input type="file" name="image" accept="image/*" />
+  <button type="submit">Register Store</button>
+</form>
+
+<script>
+  document.getElementById('storeForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    try {
+      const res = await fetch('/api/manager/register-store', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        alert('Store registered successfully!');
+        window.location.reload();
+      } else {
+        alert(result.error);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Something went wrong.');
+    }
+  });
+</script>
