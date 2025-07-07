@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const managerController = require('../controllers/storeController');
+const managerController = require('../controllers/store.controller');
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/register-store', upload.single('image'), managerControllerController.registerStore);
+router.post('/register-store', upload.single('image'), managerController.registerStore);
 router.get('/stores/:managerId', managerController.getStores);
 router.delete('/delete-store/:id', managerController.deleteStore);
 router.get('/store/:id', managerController.getStoreById);
