@@ -73,6 +73,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
         if (res.ok) {
             alert(result.message);
+            localStorage.setItem("user", JSON.stringify(result.user));
             // Redirect to role-based dashboard
             window.location.href = result.redirect;
         } else {

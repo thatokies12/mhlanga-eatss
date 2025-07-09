@@ -1,0 +1,26 @@
+function createFoldersForMultipleMonths() {
+  const months = [
+    { name: "MAY 2025", days: 31 },
+    { name: "JUNE 2025", days: 30 },
+    { name: "JULY 2025", days: 31 }
+  ];
+
+  const people = ["DAVID", "TEBATSO"];
+  const innerFolders = ["MOV", "PROJECT", "REPORT"];
+
+  months.forEach(month => {
+    const mainFolder = DriveApp.createFolder(month.name);
+
+    for (let day = 1; day <= month.days; day++) {
+      const dayStr = day.toString().padStart(2, '0') + " " + month.name.split(" ")[0];
+      const dayFolder = mainFolder.createFolder(dayStr);
+
+      people.forEach(person => {
+        const personFolder = dayFolder.createFolder(person);
+        innerFolders.forEach(sub => {
+          personFolder.createFolder(sub);
+        });
+      });
+    }
+  });
+}

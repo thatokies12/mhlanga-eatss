@@ -1,5 +1,5 @@
 <form id="storeForm" enctype="multipart/form-data">
-  <input type="hidden" name="managerId" value="2" />
+  <input type="hidden" name="managerId" id="managerId" />
   <input type="text" name="name" placeholder="Restaurant Name" required />
   <input type="text" name="location" placeholder="Location" />
   <input type="text" name="contactInfo" placeholder="Contact Info" />
@@ -8,6 +8,15 @@
 </form>
 
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.role.toLowerCase() === 'manager') {
+      document.getElementById('managerId').value = user.id;
+    } else {
+      alert('Access denied.');
+    }
+  });
+
   document.getElementById('storeForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -21,7 +30,7 @@
 
       const result = await res.json();
       if (res.ok) {
-        alert('Store registered successfully!');
+        alert(result.message);
         window.location.reload();
       } else {
         alert(result.error);

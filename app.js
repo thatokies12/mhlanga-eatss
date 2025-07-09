@@ -6,6 +6,7 @@ const driverRoutes = require('./routes/driver.routes');
 const storeRoutes = require('./routes/store.routes');
 const productRoutes = require('./routes/product.routes');
 const customerRoutes = require('./routes/customer.routes');
+const orderRoutes = require('./routes/order.routes');
 
 const app = express();
 const port = 8000;
@@ -21,5 +22,6 @@ app.use('/api/driver', driverRoutes);
 app.use('/api/manager', storeRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/customer', customerRoutes);
+app.use('api/orders', orderRoutes);
 
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('/navbar.html')
-        .then(res => res.text())
-        .then(html => {
-            document.body.insertAdjacentHTML('afterbegin', html);
-            updateUserArea();
-        });
+  fetch('/navbar.html')
+    .then(res => res.text())
+    .then(html => {
+      document.body.insertAdjacentHTML('afterbegin', html);
+      updateUserArea();
+    });
 });
 
 function updateUserArea() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const userArea = document.getElementById('userArea');
+  const user = JSON.parse(localStorage.getItem('user'));
+  const userArea = document.getElementById('userArea');
 
-    if (!userArea) return;
+  if (!userArea) return;
 
-    if (user && user.name) {
-        userArea.innerHTML = `
+  if (user && user.name) {
+    userArea.innerHTML = `
       <div class="dropdown">
         <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
           <i class="bi bi-person-circle"></i> ${user.name}
@@ -26,14 +26,14 @@ function updateUserArea() {
         </ul>
       </div>
     `;
-    } else {
-        userArea.innerHTML = `
-      <a href="/login.html" class="btn btn-outline-primary">Login</a>
+  } else {
+    userArea.innerHTML = `
+      <a href="/login_register.html" class="btn btn-outline-primary">Login</a>
     `;
-    }
+  }
 }
 
 function logout() {
-    localStorage.removeItem('user');
-    window.location.href = '/login.html';
+  localStorage.removeItem('user');
+  window.location.href = '/login_register.html';
 }
