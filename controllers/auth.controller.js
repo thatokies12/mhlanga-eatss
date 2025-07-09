@@ -81,7 +81,7 @@ exports.login = (req, res) => {
 
             return res.json({
                 message: 'Login successful',
-                user: { name: user.username, role: user.role },
+                user: { id: user.id, name: user.username, role: user.role },
                 redirect: redirectMap[user.role]
             });
         });

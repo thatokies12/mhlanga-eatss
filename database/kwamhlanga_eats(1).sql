@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2025 at 05:08 AM
+-- Generation Time: Jul 09, 2025 at 04:51 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -45,6 +45,17 @@ CREATE TABLE `cart_items` (
   `cart_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -141,7 +152,8 @@ CREATE TABLE `products` (
   `name` varchar(100) NOT NULL,
   `description` text,
   `price` decimal(10,2) NOT NULL,
-  `image` varchar(255) DEFAULT NULL
+  `image` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -158,6 +170,16 @@ CREATE TABLE `stores` (
   `contact_info` varchar(100) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stores`
+--
+
+INSERT INTO `stores` (`id`, `manager_id`, `name`, `location`, `contact_info`, `image`) VALUES
+(10, 10, 'Corners Kitchen', 'KwaMhlanga', '0123456789', '1752070176694.jpg'),
+(12, 10, 'Eziko Kitchen', 'KwaMhlanga', '01456565', '1752070325103.jpg'),
+(13, 10, 'Blac Boy joint', 'KwaMhlanga', '023456789', '1752070385412.jpg'),
+(14, 10, 'Kwa-Vundla', 'KwaMhlanga', '014747025', '1752070609026.jpg');
 
 -- --------------------------------------------------------
 
@@ -206,6 +228,12 @@ ALTER TABLE `cart_items`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `deliveries`
 --
 ALTER TABLE `deliveries`
@@ -240,7 +268,8 @@ ALTER TABLE `order_items`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `store_id` (`store_id`);
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexes for table `stores`
@@ -270,6 +299,12 @@ ALTER TABLE `carts`
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -306,7 +341,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `stores`
 --
 ALTER TABLE `stores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -356,7 +391,8 @@ ALTER TABLE `order_items`
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`);
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`),
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
 
 --
 -- Constraints for table `stores`

@@ -3,6 +3,7 @@ const db = require('../config/db');
 
 exports.registerStore = (req, res) => {
     const { managerId, name, location, contactInfo } = req.body;
+    console.log('managerId received:', managerId);
     const image = req.file ? req.file.filename : null;
 
     const newStore = new Store({ managerId, name, location, contactInfo, image });
@@ -21,7 +22,8 @@ exports.getStores = (req, res) => {
     WHERE manager_id = ?`;
 
     db.query(sql, [managerId], (err, results) => {
-        if (err) return res.status(500).json({ error: err.message });
+        if (err)
+            return res.status(500).json({ error: err.message });
         res.json(results);
     });
 };
