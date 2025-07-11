@@ -1,43 +1,66 @@
+const path = require('path');
 const Product = require('../models/Product');
 const db = require('../config/db');
 
-exports.addProduct = (req, res) => {
-    const { storeId, name, description, price } = req.body;
-    const image = req.file ? req.file.filename : null;
+const ProductController = {
+    addProduct: async (req, res) => {
+        try {
+            const { storeId, name, description, price, categoryId } = req.body;
+            const image = req.file ? req.file.filename : null;
 
-    const newProduct = new Product({ storeId, name, description, price, image });
+            if (!storeId || !name || !price || !categoryId) {
+                return res.status(400).json({ error: 'Missing required fields' });
+            }
 
-    Product.create(newProduct, db, (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.status(201).json({ message: 'Product added successfully' });
-    });
+            const product = new Product(db);
+            await product.create({ storeId, name, description, price, image, categoryId });
+
+            res.status(201).json({ message: 'Product added successfully' });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    },
+
+    getProductsByStore: async (req, res) => {
+        try {
+            const { storeId } = req.params;
+            const product = new Product(db);
+            const products = await product.getProductsByStore(storeId);
+            res.json(products);
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Failed to fetch products' });
+        }
+    },
+
+    updateProduct: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { name, description, price, categoryId } = req.body;
+            const image = req.file ? req.file.filename : req.body.existingImage || null;
+
+            const product = new Product(db);
+            await product.update(id, { name, description, price, image, categoryId });
+
+            res.json({ message: 'Product updated successfully' });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Failed to update product' });
+        }
+    },
+
+    deleteProduct: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const product = new Product(db);
+            await product.delete(id);
+            res.json({ message: 'Product deleted successfully' });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Failed to delete product' });
+        }
+    }
 };
 
-exports.getProductsByStore = (req, res) => {
-    const storeId = req.params.storeId;
-
-    Product.findByStoreId(storeId, db, (err, results) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(results);
-    });
-};
-
-exports.updateProduct = (req, res) => {
-    const productId = req.params.id;
-    const { name, description, price } = req.body;
-    const image = req.file ? req.file.filename : null;
-
-    Product.update(productId, { name, description, price, image }, db, (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ message: 'Product updated successfully' });
-    });
-};
-
-exports.deleteProduct = (req, res) => {
-    const productId = req.params.id;
-
-    Product.delete(productId, db, (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ message: 'Product deleted successfully' });
-    });
-};
+module.exports = ProductController;
