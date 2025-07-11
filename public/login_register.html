@@ -1,23 +1,23 @@
-<!DOCTYPE html>
+<!DOCTYPE >
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery App - Login & Signup</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> <!-- Updated Font Awesome -->
 </head>
 <body>
     <div class="login-container">
         <!-- Logo -->
-        <img src="./assets/img/logo.jpg" alt="Delivery App Logo" class="logo">
+        <img src="assets/logo.jpg" alt="Delivery App Logo" class="logo">
 
         <!-- Login Form --> 
         <form id="loginForm">
-            <input type="text" id="login-username" placeholder="Username" required>
+            <input type="text" id="login-email" placeholder="email" required>
             <input type="password" id="login-password" placeholder="Password" required>
             <button type="submit">Login</button>
-            <p id="message"></p>
+            <p id="login-error-message"></p>
         </form>
 
         <!-- Signup Form (Hidden by Default) -->
@@ -28,15 +28,33 @@
   <option value="">-- Select Role --</option>
   <option value="customer">Customer</option>
   <option value="driver">Driver</option>
-  <option value="manager">Strore Manager</option>
+  <option value="admin">Strore Manager</option>
    </select>
+
+
+
+        <div id= "customerForm"  method="post" style="display: none;"> 
 		   <input type="text" id="signup-username" placeholder="Username" required>
             <input type="email" id="signup-email" placeholder="Email" required>
             <input type="password" id="signup-password" placeholder="Password" required>
+		</div>
+		
+		<div id="driverForm"  method="post" style="display: none;"> 
+                    <input type="email" id="driver-email" placeholder="Email (for contact)" required />
+                    <input type="text" id="driver-license" placeholder="Driver's License" required />
+                    <input type="text" id="number-plate" placeholder="Number Plate" required />
+        </div>
+		
+		<div id= "storeManangerForm"  method="post" style="display: none;"> 
+			  <input type="email" id="manager-email" placeholder="Email (for contact)" required />
+                    <input type="text" id="store-name" placeholder="Store Name" required />
+                    <input type="text" id="store-location" placeholder="Store Location" required />
+                `	
+		</div>
 
 
          <button type="submit">Sign Up</button>
-            <p id="message"></p>
+            <p id="signup-error-message"></p>
 			
         </form>
 		
@@ -61,6 +79,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
