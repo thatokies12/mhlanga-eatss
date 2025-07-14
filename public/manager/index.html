@@ -53,7 +53,7 @@
                     <p class="card-text"><strong>Contact:</strong> ${store.contact_info}</p>
                     <div class="d-flex justify-content-between">
                       <a href="/manager/edit-store.html?id=${store.id}" class="btn btn-sm btn-outline-primary">Edit</a>
-                      <a href="/manager/products.html" class="btn btn-sm btn-outline-success">View Store</a>
+                      <a href="/manager/products.html?id=${store.id}" class="btn btn-sm btn-outline-success">View Store</a>
                       <button class="btn btn-sm btn-outline-danger" onclick="deleteStore(${store.id})">Delete</button>
                     </div>
                   </div>

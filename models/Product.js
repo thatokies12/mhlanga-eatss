@@ -1,39 +1,42 @@
 class Product {
-    constructor(data) {
-        this.storeId = data.storeId;
-        this.name = data.name;
-        this.description = data.description;
-        this.price = data.price;
-        this.image = data.image;
+    constructor(db) {
+        this.db = db;
     }
 
-    static create(product, db, callback) {
-        const sql = `INSERT INTO products (store_id, name, description, price, image)
-                 VALUES (?, ?, ?, ?, ?)`;
-        const values = [product.storeId, product.name, product.description, product.price, product.image];
-        db.query(sql, values, callback);
-    }
-
-    static findByStoreId(storeId, db, callback) {
-        const sql = `SELECT * FROM products WHERE store_id = ?`;
-        db.query(sql, [storeId], callback);
-    }
-
-    static update(id, data, db, callback) {
+    async create({ storeId, name, description, price, image, categoryId }) {
         const sql = `
-      UPDATE products SET name = ?, description = ?, price = ?${data.image ? ', image = ?' : ''}
-      WHERE id = ?`;
-
-        const values = data.image
-            ? [data.name, data.description, data.price, data.image, id]
-            : [data.name, data.description, data.price, id];
-
-        db.query(sql, values, callback);
+      INSERT INTO products (store_id, name, description, price, image, category_id)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `;
+        const [result] = await this.db.execute(sql, [storeId, name, description, price, image, categoryId]);
+        return result;
     }
 
-    static delete(id, db, callback) {
+    async getProductsByStore(storeId) {
+        const sql = `
+      SELECT p.*, c.name AS category
+      FROM products p
+      LEFT JOIN categories c ON p.category_id = c.id
+      WHERE p.store_id = ?
+    `;
+        const [rows] = await this.db.execute(sql, [storeId]);
+        return rows;
+    }
+
+    async update(id, { name, description, price, image, categoryId }) {
+        const sql = `
+      UPDATE products
+      SET name = ?, description = ?, price = ?, image = ?, category_id = ?
+      WHERE id = ?
+    `;
+        const [result] = await this.db.execute(sql, [name, description, price, image, categoryId, id]);
+        return result;
+    }
+
+    async delete(id) {
         const sql = `DELETE FROM products WHERE id = ?`;
-        db.query(sql, [id], callback);
+        const [result] = await this.db.execute(sql, [id]);
+        return result;
     }
 }
 
