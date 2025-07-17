@@ -72,6 +72,10 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         const result = await res.json();
 
         if (res.ok) {
+            // ✅ Set sessionStorage values
+            sessionStorage.setItem('user_id', result.user.id);
+            sessionStorage.setItem('user_name', result.user.name);
+            sessionStorage.setItem('user_role', result.user.role);
             alert(result.message);
             localStorage.setItem("user", JSON.stringify(result.user));
             // Redirect to role-based dashboard
