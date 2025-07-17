@@ -6,7 +6,6 @@ const driverRoutes = require('./routes/driver.routes');
 const storeRoutes = require('./routes/store.routes');
 const productRoutes = require('./routes/product.routes');
 const customerRoutes = require('./routes/customer.routes');
-const orderRoutes = require('./routes/order.routes');
 const categoryRoutes = require('./routes/category.routes');
 
 const app = express();
@@ -23,13 +22,17 @@ app.use('/api/driver', driverRoutes);
 app.use('/api/manager', storeRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/customer', customerRoutes);
-app.use('/api/orders', orderRoutes);
+app.use('/api/orders', require('./routes/order.routes'));
 app.use('/api/categories', categoryRoutes);
 
 const cartRoutes = require('./routes/cart.routes')
 app.use('/api/cart', cartRoutes);
 const notificationRoutes = require('./routes/notification.routes')
 app.use('/api/notifications', notificationRoutes);
+
+const deliveryRoutes = require('./routes/delivery.routes');
+app.use('/api/deliveries', deliveryRoutes);
+
 
 const productsRoutes = require('./routes/productRoutes');
 app.use('/api/products', productsRoutes);

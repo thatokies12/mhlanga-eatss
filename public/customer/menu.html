@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Restaurant Menu</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
   <script src="../sessions.js" defer></script>
 </head>
 <body>
@@ -15,48 +16,54 @@
     <div id="productList" class="row gy-4">
       <!-- Products will be loaded here -->
     </div>
+    <a href="./cart.html" class="btn btn-sm btn-outline-success">View Cart</a>
   </div>
 
-  <script>
-    const storeId = new URLSearchParams(window.location.search).get('storeId');
+ <script>
+  // Assuming this page receives ?storeId=3
+const storeId = new URLSearchParams(window.location.search).get('storeId');
+sessionStorage.setItem('store_id', storeId);
 
-    // Load store name
-    fetch(`/api/manager/store/${storeId}`)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('storeName').innerText = `Menu – ${data.name}`;
-      });
 
-    // Load products
-    fetch(`/api/products/store/${storeId}`)
-      .then(res => res.json())
-      .then(products => {
-        const container = document.getElementById('productList');
+  // Load store name
+  fetch(`/api/manager/store/${storeId}`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('storeName').innerText = `Menu – ${data.name}`;
+    });
 
-        if (products.length === 0) {
-          container.innerHTML = "<p>No products found.</p>";
-          return;
-        }
+  // Load products
+  fetch(`/api/products/store/${storeId}`)
+    .then(res => res.json())
+    .then(products => {
+      const container = document.getElementById('productList');
 
-        products.forEach(product => {
-          container.innerHTML += `
-            <div class="col-md-4">
-              <div class="card h-100 shadow-sm">
-                ${product.image ? `<img src="/uploads/${product.image}" class="card-img-top" alt="${product.name}">` : ''}
-                <div class="card-body">
-                  <h5 class="card-title">${product.name}</h5>
-                  <p class="card-text">${product.description}</p>
-                  <p><strong>R${product.price}</strong></p>
-                  <button class="btn btn-outline-success w-100" onclick="addToCart(${product.id})">Add to Cart</button>
-                </div>
+      if (products.length === 0) {
+        container.innerHTML = "<p>No products found.</p>";
+        return;
+      }
+
+      products.forEach(product => {
+        container.innerHTML += `
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              ${product.image ? `<img src="/uploads/${product.image}" class="card-img-top" alt="${product.name}">` : ''}
+              <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text">${product.description}</p>
+                <p><strong>R${product.price}</strong></p>
+                <button class="btn btn-outline-success w-100" onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
               </div>
             </div>
-          `;
-        });
+          </div>
+        `;
       });
+    });
 
 function addToCart(product) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  localStorage.setItem('cart', JSON.stringify(cart));
+
 
   const existing = cart.find(item => item.productId === product.id);
   if (existing) {
@@ -71,11 +78,16 @@ function addToCart(product) {
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
+  //updateCartCount(); // Refresh icon count after adding
+
   alert(`${product.name} added to cart`);
+  console.log('Cart now contains:', cart);
+
+
 }
 
+</script>
 
-  </script>
 
 </body>
 </html>
