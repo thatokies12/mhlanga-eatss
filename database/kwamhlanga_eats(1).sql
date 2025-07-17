@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2025 at 04:51 PM
+-- Generation Time: Jul 15, 2025 at 01:19 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -57,6 +57,16 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'burgers'),
+(2, 'sandwhitches'),
+(3, 'Staple foods'),
+(4, 'Chips');
 
 -- --------------------------------------------------------
 
@@ -112,18 +122,30 @@ INSERT INTO `drivers` (`id`, `email`, `phone_number`, `id_number`, `username`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `message` text,
+  `read_status` tinyint(1) DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `store_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `driver_id` int(11) DEFAULT NULL,
   `total_amount` decimal(10,2) DEFAULT NULL,
-  `status` enum('pending','preparing','out_for_delivery','delivered','cancelled') DEFAULT 'pending',
-  `payment_status` enum('paid','pending','failed') DEFAULT 'pending',
-  `payment_method` varchar(50) DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `delivery_status` enum('pending','out_for_delivery','delivered') DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -148,13 +170,24 @@ CREATE TABLE `order_items` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `description` text,
+  `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL
+  `store_id` int(11) DEFAULT NULL,
+  `category` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `store_id`, `category`) VALUES
+(3, 'Pap & Steak', 'Pap with steak and two sides', '85.00', '1752235254277-images (6).jpeg', 12, 'Staple foods'),
+(4, 'Pap & Wors', 'Pap with wors and chakalaka salad', '60.00', '1752235452581-images (4).jpeg', 12, 'Staple foods'),
+(5, 'Small boy', '100g beef patty, lettuce, tomato, cheese & caramelized onion', '29.99', '1752236568106-images (12).jpeg', 13, 'burgers'),
+(6, 'CHICKEN BOY', 'chicken breast, lettuce, tomato, cheese & onion', '30.99', '1752236686189-images (15).jpeg', 13, 'burgers'),
+(7, 'CHILLI CHEESE BOY', '2 x 100g beef patty, onion, cheese, bacon, lettuce', '44.99', '1752236887413-images (13).jpeg', 13, 'burgers');
 
 -- --------------------------------------------------------
 
@@ -248,12 +281,19 @@ ALTER TABLE `drivers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `store_id` (`store_id`);
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `driver_id` (`driver_id`);
 
 --
 -- Indexes for table `order_items`
@@ -268,8 +308,7 @@ ALTER TABLE `order_items`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `store_id` (`store_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `store_id` (`store_id`);
 
 --
 -- Indexes for table `stores`
@@ -305,7 +344,7 @@ ALTER TABLE `cart_items`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `deliveries`
@@ -318,6 +357,12 @@ ALTER TABLE `deliveries`
 --
 ALTER TABLE `drivers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -335,7 +380,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `stores`
@@ -374,11 +419,17 @@ ALTER TABLE `deliveries`
   ADD CONSTRAINT `deliveries_ibfk_2` FOREIGN KEY (`driver_id`) REFERENCES `users` (`id`);
 
 --
+-- Constraints for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`driver_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `order_items`
@@ -386,13 +437,6 @@ ALTER TABLE `orders`
 ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`),
-  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
 
 --
 -- Constraints for table `stores`

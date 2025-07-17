@@ -4,19 +4,305 @@
   <meta charset="UTF-8" />
   <title>Browse Restaurants</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+
     <script src="./tailwindCSS.js"></script>
   <script src="../sessions.js" defer></script>
 </head>
+<style>
+
+.img-fluid {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-icon img {
+  width: 60px;      /* Or adjust as needed */
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.menu-icon .label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+}
+
+/* Sidebar styling */
+#sidebar {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center;     /* Center the items horizontally */
+  height: 100vh;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: red; 
+  padding-top: 1rem;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  color: white;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1040;
+}
+
+
+.sidebar-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sidebar-logo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.sidebar-logo h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#sidebar.closed {
+  transform: translateX(-100%);
+}
+
+#sidebar a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;             /* full width */
+  padding: 12px 20px;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+#sidebar a i {
+  margin-right: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+#sidebar a:hover {
+  background: #5a32a3;
+  color: #ffc107; /* yellow on hover */
+}
+
+#sidebarToggle {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1100;
+  background: #6f42c1;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#main-content {
+  margin-left: 250px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+#main-content.expanded {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar {
+    transform: translateX(0);
+  }
+
+  #sidebarToggle {
+    display: none;
+  }
+
+  #main-content {
+    margin-left: 250px;
+  }
+}
+
+
+  </style>
 <body>
 
-  <div class="container mt-4">
-    <h2 class="mb-4">Available Restaurants</h2>
-    <div id="restaurantList" class="row gy-4">
-      <!-- Restaurants will be loaded here -->
-    </div>
+<!-- <button id="sidebarToggle" aria-label="Toggle sidebar">
+  ☰ Menu
+</button>
+
+<nav id="sidebar" aria-label="Sidebar navigation">
+  <a href="/customer/home.html">Home</a>
+  <a href="/customer/orders.html">Orders</a>
+  <a href="/customer/profile.html">Profile</a>
+  <a href="/customer/settings.html">Settings</a>
+  <a href="/customer/help.html">Help</a>
+</nav> -->
+
+ <nav id="sidebar" aria-label="Sidebar navigation">
+  <div class="sidebar-logo">
+    <img src="your-logo.png" alt="Logo">
+    <h2>FoodMeal</h2>
   </div>
 
+  <a href="/customer/home.html"><i class="fas fa-home"></i> Home</a>
+  <a href="/customer/orders.html"><i class="fas fa-box"></i> Orders</a>
+  <a href="/customer/profile.html"><i class="fas fa-user"></i> Profile</a>
+  <a href="/customer/settings.html"><i class="fas fa-cog"></i> Settings</a>
+  <a href="/customer/help.html"><i class="fas fa-question-circle"></i> Help</a>
+</nav>
+
+
+<div id="main-content">
+
+  <div class="container mt-4">
+
+  <div class="d-flex justify-content-center mb-4">
+    <div class="input-group" style="max-width: 400px; width: 100%;">
+      <span class="input-group-text bg-white">
+        <i class="bi bi-search"></i>
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Try 'Kid’s meals'"
+      />
+    </div>
+  </div>
+</div>
+
+
+    <h2 class="mb-4 fw-bold text-center">Available Restaurants</h2>
+  
+<div class="row text-center mb-3">
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/pizza_v3.png" alt="Hot Deals" class="img-fluid mb-2" />
+      <div class="label">Hot Deals</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/chicken_v3.png" alt="Chicken" class="img-fluid mb-2" />
+      <div class="label">Chicken</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/burgers_v3.png" alt="Burgers" class="img-fluid mb-2" />
+      <div class="label">Burgers</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/seafood_v3.png" alt="Seafood" class="img-fluid mb-2" />
+      <div class="label">Seafood</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/cafedeli_v3.png" alt="Deli" class="img-fluid mb-2" />
+      <div class="label">Deli</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/sushi_v3.png" alt="Sushi" class="img-fluid mb-2" />
+      <div class="label">Sushi</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/dessert_v3.png" alt="Dessert" class="img-fluid mb-2" />
+      <div class="label">Dessert</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/african_v3.png" alt="African" class="img-fluid mb-2" />
+      <div class="label">African</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/steakandgrills_v3.png" alt="Grilled" class="img-fluid mb-2" />
+      <div class="label">Grilled</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/worldflavours_v3.png" alt="Global" class="img-fluid mb-2" />
+      <div class="label">Global</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/asian_v3.png" alt="Asian" class="img-fluid mb-2" />
+      <div class="label">Asian</div>
+    </div>
+  </div>
+  <div class="col-4 col-md-2 mb-3">
+    <div class="menu-icon">
+      <img src="../assets/img/indian_v3.png" alt="Indian" class="img-fluid mb-2" />
+      <div class="label">Indian</div>
+    </div>
+  </div>
+</div>
+
+  <div class="d-flex flex-wrap gap-2">
+    <span class="badge bg-light text-dark border">Top Rated</span>
+    <span class="badge bg-light text-dark border">Fast</span>
+    <span class="badge bg-light text-dark border">Halaal</span>
+    <span class="badge bg-light text-dark border">Vegetarian</span>
+    <span class="badge bg-light text-dark border">Vegan</span>
+    <span class="badge bg-light text-dark border">Gluten Free</span>
+  </div>
+
+  <br>
+
+
+    <div id="restaurantList" class="row gy-4"> 
+      <!-- Restaurants will be loaded here -->
+     </div>
+  </div>
+
+
+</div>
+</div>
   <script>
+
+  const sidebar = document.getElementById('sidebar');
+  const mainContent = document.getElementById('main-content');
+  const toggleBtn = document.getElementById('sidebarToggle');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('closed');
+    mainContent.classList.toggle('expanded');
+  });
+
+
     document.addEventListener('DOMContentLoaded', () => {
       fetch('/api/customer/restaurants')
         .then(res => res.json())
@@ -29,19 +315,26 @@
           }
 
           data.forEach(store => {
-            container.innerHTML += `
-              <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                  ${store.image ? `<img src="/uploads/${store.image}" class="card-img-top" alt="${store.name}">` : ''}
-                  <div class="card-body">
-                    <h5 class="card-title">${store.name}</h5>
-                    <p class="card-text">${store.location}</p>
-                    <a href="/customer/menu.html?storeId=${store.id}" class="btn btn-primary w-100">View Menu</a>
-                  </div>
-                </div>
-              </div>
-            `;
-          });
+  container.innerHTML += `
+    <div class="col-6 col-md-3 mb-3">
+      <div class="card h-100 shadow-sm" style="border-radius:4px;">
+        ${store.image ? `<img
+  src="/uploads/${store.image}"
+  class="card-img-top"
+  alt="${store.name}"
+  style="height:150px; object-fit:cover; border-top-left-radius:4px; border-top-right-radius:4px;"
+>
+` : ''}
+        <div class="card-body">
+          <h5 class="card-title">${store.name}</h5>
+          <p class="card-text">${store.location}</p>
+          <a href="/customer/menu.html?storeId=${store.id}" class="btn w-full bg-red-600 text-white font-semibold py-2 rounded-md hover:bg-red-700 transition">Order Now</a>
+        </div>
+      </div>
+    </div>
+  `;
+});
+
         })
         .catch(err => {
           console.error(err);
