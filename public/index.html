@@ -3,65 +3,768 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Delivery App - Login & Signup</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> <!-- Updated Font Awesome -->
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+
+    <title>KwaMhlanga Eats - Food & Grocery Delivery</title>
+    <script src="./tailwindCSS.js"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'crimson',secondary:'#2EC4B6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-section {
+            background-image: url('https://readdy.ai/api/search-image?query=A%20vibrant%20food%20delivery%20scene%20with%20delicious%20local%20dishes%20on%20one%20side%20and%20fresh%20groceries%20on%20the%20other%2C%20set%20against%20a%20warm%20sunset%20background%20in%20a%20South%20African%20township.%20The%20image%20has%20a%20clean%20gradient%20from%20light%20to%20darker%20tones%20on%20the%20right%20side%2C%20with%20natural%20lighting%20and%20appetizing%20food%20presentation&width=1920&height=600&seq=1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .custom-checkbox {
+            display: none;
+        }
+        .custom-checkbox-label {
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+        }
+        .custom-checkbox-label:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            background-color: white;
+        }
+        .custom-checkbox:checked + .custom-checkbox-label:before {
+            background-color: purble;
+            border-color: purble;
+        }
+        .custom-checkbox:checked + .custom-checkbox-label:after {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 3px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e5e7eb;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: purble;
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(30px);
+        }
+        .custom-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;
+            background: #e5e7eb;
+            outline: none;
+        }
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff2a1bcc;
+            cursor: pointer;
+        }
+        .custom-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff2a1bcc;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+
 </head>
-<body>
-    <div class="login-container">
-        <!-- Logo -->
-        <img src="./assets/img/logo.jpg" alt="Delivery App Logo" class="logo">
-
-        <!-- Login Form --> 
-        <form id="loginForm">
-            <input type="text" id="login-username" placeholder="Username" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button type="submit">Login</button>
-            <p id="message"></p>
-        </form>
-
-        <!-- Signup Form (Hidden by Default) -->
- <form id="signupForm" class="hidden">
-      
-		
-  <select id="userRole">
-  <option value="">-- Select Role --</option>
-  <option value="customer">Customer</option>
-  <option value="driver">Driver</option>
-  <option value="manager">Strore Manager</option>
-   </select>
-		   <input type="text" id="signup-username" placeholder="Username" required>
-            <input type="email" id="signup-email" placeholder="Email" required>
-            <input type="password" id="signup-password" placeholder="Password" required>
-
-
-         <button type="submit">Sign Up</button>
-            <p id="message"></p>
-			
-        </form>
-		
-
-        <!-- Social Media Login -->
-        <div class="social-login">
-            <p>Or login with:</p>
-            <button class="google-btn"><i class="fa-brands fa-google"></i></button>
-            <button class="facebook-btn"><i class="fa-brands fa-facebook-f"></i> </button>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+<img src="/assets/img/logo.jpg" alt="KwaMhlanga Eats Logo" class="h-12 mx-auto">
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:flex items-center flex-1 max-w-md mx-4">
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <div class="w-5 h-5 flex items-center justify-center text-gray-400">
+                                <i class="ri-search-line"></i>
+                            </div>
+                        </div>
+                        <input type="text" class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Search for restaurants or groceries...">
+                    </div>
+                </div>
+                
+                <!-- Right Navigation -->
+                <div class="flex items-center space-x-4">
+                    <button class="relative w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary">
+                        <i class="ri-notification-3-line ri-lg"></i>
+                        <span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+                    </button>
+                    <button class="relative w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary">
+                        <i class="ri-shopping-cart-2-line ri-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-xs rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    <div class="relative">
+                        <button id="profileButton" class="flex items-center space-x-2 focus:outline-none">
+                            <div class="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
+                                <img src="" alt="Profile" class="w-full h-full object-cover">
+                            </div>
+<div id="userArea"></div>
+                           
+						 <!--  <span class="hidden md:block text-sm font-medium">Kgopotso Makua</span>  -->
+                            <div class="w-4 h-4 flex items-center justify-center">
+                                <i class="ri-arrow-down-s-line"></i>
+                            </div>
+                        </button>
+                        <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg py-1 hidden">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Order History</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Addresses</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Payment Methods</a>
+                            <div class="border-t border-gray-100"></div>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Location and Service Type -->
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between py-3 border-t border-gray-100">
+                <div class="flex items-center space-x-2 text-sm">
+                    <div class="w-4 h-4 flex items-center justify-center text-primary">
+                        <i class="ri-map-pin-line"></i>
+                    </div>
+                    <button class="font-medium flex items-center">
+                        KwaMhlanga Central, 1022
+                        <div class="w-4 h-4 flex items-center justify-center ml-1">
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="flex items-center space-x-4 mt-2 md:mt-0">
+                    <button class="px-4 py-1.5 bg-red-700 text-white rounded-full text-sm font-medium !rounded-button whitespace-nowrap">Food Delivery</button>
+                    <button class="px-4 py-1.5 bg-red-700 border  text-white rounded-full text-sm font-medium !rounded-button whitespace-nowrap">Grocery</button>
+                    <button id="openLoginModal" class="px-4 py-1.5 bg-red-700 text-white rounded-full text-sm font-medium !rounded-button whitespace-nowrap">Login/Register</button>
+                </div>
+            </div>
         </div>
+    </header>
+   
 
-        <!-- Toggle Login/Signup -->
-        <p class="toggle-text">
-            Don't have an account? <a href="#" id="toggleSignup">Sign Up</a>
-        </p>
-
-        <!-- Enquiries Section -->
-        <div class="enquiries">
-            <h3><i class="fa-solid fa-question-circle"></i> Need Help?</h3>
-            <p><i class="fa-solid fa-envelope"></i> thatoaphane7@gmail.com</p>
-            <p><i class="fa-solid fa-phone"></i> +27 79 418 2596</p>
+    <!-- Hero Section -->
+    <section class="hero-section relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-black/60"></div>
+        <div class="container mx-auto px-4 py-16 md:py-24 relative z-10">
+            <div class="max-w-xl">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Local Flavors, <br>Delivered Fast</h1>
+                <p class="text-xl text-white/90 mb-8">The best restaurants and grocery stores in KwaMhlanga, delivered to your doorstep.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="px-6 py-3 bg-red-700 text-white rounded-button font-medium text-lg flex items-center justify-center whitespace-nowrap">
+                        <div class="w-5 h-5 flex items-center justify-center mr-2">
+                            <i class="ri-restaurant-line"></i>
+                        </div>
+                        Order Food Now
+                    </button>
+                    <button class="px-6 py-3 bg-white text-gray-800 rounded-button font-medium text-lg flex items-center justify-center whitespace-nowrap">
+                        <div class="w-5 h-5 flex items-center justify-center mr-2">
+                            <i class="ri-shopping-basket-2-line"></i>
+                        </div>
+                        Shop Groceries
+                    </button>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- Category Filters -->
+    <section class="py-6 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-hide">
+                <button class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium whitespace-nowrap">All</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">Fast Food</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">Traditional</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">Chicken</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">Pizza</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">Burgers</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">Vegetarian</button>
+                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">Desserts</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Restaurants -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6">Featured Restaurants</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Restaurant Card 1 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=Authentic%20South%20African%20grilled%20meats%20and%20traditional%20dishes%20displayed%20beautifully%20on%20a%20wooden%20table%20with%20vibrant%20vegetables%20and%20sides.%20The%20food%20is%20well-lit%20with%20natural%20lighting%2C%20showing%20the%20textures%20and%20colors%20of%20the%20dishes.%20The%20background%20is%20simple%20and%20clean%2C%20focusing%20on%20the%20delicious%20food&width=400&height=240&seq=3&orientation=landscape" alt="Mama's Kitchen" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">EZIKO Kitchen</h3>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Open</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="mr-2">4.8</span>
+                            <span class="mr-2">(124)</span>
+                            <span>• Traditional</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="mr-3">25-35 min</span>
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-coin-line"></i>
+                            </div>
+                            <span>R30 delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant Card 2 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=A%20gourmet%20burger%20with%20fresh%20ingredients%20on%20a%20wooden%20serving%20board%2C%20accompanied%20by%20crispy%20golden%20fries.%20The%20burger%20has%20a%20juicy%20patty%20with%20melted%20cheese%2C%20fresh%20lettuce%2C%20tomato%2C%20and%20a%20brioche%20bun.%20The%20lighting%20is%20warm%20and%20inviting%2C%20highlighting%20the%20textures%20of%20the%20food.%20The%20background%20is%20simple%20and%20clean&width=400&height=240&seq=4&orientation=landscape" alt="Burger Shack" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">BLAC BOY'S</h3>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Open</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="mr-2">4.6</span>
+                            <span class="mr-2">(89)</span>
+                            <span>• Burgers</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="mr-3">15-25 min</span>
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-coin-line"></i>
+                            </div>
+                            <span>R20 delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant Card 3 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=A%20perfectly%20baked%20pizza%20with%20melted%20cheese%2C%20fresh%20toppings%20including%20colorful%20vegetables%20and%20herbs.%20The%20crust%20is%20golden%20and%20slightly%20charred.%20The%20pizza%20is%20photographed%20from%20above%20on%20a%20rustic%20wooden%20surface%20with%20some%20garnishes%20visible.%20The%20lighting%20is%20warm%20and%20appetizing&width=400&height=240&seq=5&orientation=landscape" alt="Pizza Palace" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">Etjanini Restuarant</h3>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Open</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="mr-2">4.5</span>
+                            <span class="mr-2">(76)</span>
+                            <span>• Pizza</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="mr-3">30-40 min</span>
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-coin-line"></i>
+                            </div>
+                            <span>R15 delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant Card 4 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=A%20beautifully%20arranged%20plate%20of%20fresh%20chicken%20stir-fry%20with%20colorful%20vegetables%20and%20rice.%20The%20dish%20is%20garnished%20with%20herbs%20and%20has%20a%20glossy%20sauce.%20The%20lighting%20highlights%20the%20vibrant%20colors%20of%20the%20vegetables%20and%20the%20texture%20of%20the%20perfectly%20cooked%20chicken.%20The%20background%20is%20clean%20and%20minimal&width=400&height=240&seq=6&orientation=landscape" alt="Spice Route" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">Corner Kitchen</h3>
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Closed</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="mr-2">4.7</span>
+                            <span class="mr-2">(102)</span>
+                            <span>• African food</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="mr-3">35-45 min</span>
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-coin-line"></i>
+                            </div>
+                            <span>R30 delivery</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Grocery Stores -->
+    <section class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6">Popular Grocery Stores</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Store Card 1 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=A%20well-stocked%20grocery%20store%20interior%20with%20fresh%20produce%20section%20prominently%20displayed.%20Fruits%20and%20vegetables%20are%20arranged%20neatly%20with%20vibrant%20colors.%20The%20store%20has%20good%20lighting%2C%20clean%20aisles%2C%20and%20a%20modern%20appearance.%20Some%20shoppers%20can%20be%20seen%20browsing%20the%20selection&width=400&height=240&seq=7&orientation=landscape" alt="Fresh Market" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">Shoprite</h3>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Open</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="mr-2">4.9</span>
+                            <span class="mr-2">(156)</span>
+                            <span>• Grocery</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="mr-3">30-45 min</span>
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-coin-line"></i>
+                            </div>
+                            <span>R30 delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Card 2 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=A%20local%20convenience%20store%20exterior%20with%20a%20clean%20storefront%20and%20visible%20signage.%20The%20entrance%20is%20welcoming%20with%20some%20promotional%20posters%20visible.%20The%20store%20has%20good%20lighting%20and%20appears%20well-maintained.%20Some%20customers%20are%20entering%20or%20exiting%20the%20store&width=400&height=240&seq=8&orientation=landscape" alt="Quick Stop" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">Quick Stop</h3>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Open</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="mr-2">4.5</span>
+                            <span class="mr-2">(98)</span>
+                            <span>• Convenience</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="mr-3">15-25 min</span>
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-coin-line"></i>
+                            </div>
+                            <span>R20 delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Card 3 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=A%20pharmacy%20interior%20with%20well-organized%20shelves%20of%20medications%20and%20health%20products.%20The%20pharmacy%20counter%20is%20visible%20with%20pharmacists%20working.%20The%20space%20is%20clean%2C%20well-lit%2C%20and%20professional%20looking.%20Some%20customers%20are%20being%20served%20at%20the%20counter&width=400&height=240&seq=9&orientation=landscape" alt="MediMart" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">the local choice </h3>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Open</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="mr-2">4.7</span>
+                            <span class="mr-2">(67)</span>
+                            <span>• Pharmacy</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="mr-3">20-30 min</span>
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-coin-line"></i>
+                            </div>
+                            <span>R25 delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Card 4 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="h-40 overflow-hidden">
+                        <img src="data:image/jpeg;base64,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">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">mjakes shisanyama</h3>
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Closed</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="mr-2">4.8</span>
+                            <span class="mr-2">(42)</span>
+                            <span>• Meat</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="mr-3">25-40 min</span>
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-coin-line"></i>
+                            </div>
+                            <span>R35 delivery</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">How Mhlanga Eatss Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-store-3-line ri-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Choose a Restaurant or Store</h3>
+                    <p class="text-gray-600">Browse through our selection of local restaurants and grocery stores in KwaMhlanga.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-shopping-basket-2-line ri-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Select Your Items</h3>
+                    <p class="text-gray-600">Add your favorite meals or grocery items to your cart with just a few taps.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 flex items-center justify-center text-primary">
+                            <i class="ri-bike-line ri-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Get Fast Delivery</h3>
+                    <p class="text-gray-600">Our drivers will deliver your order right to your doorstep in no time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download App -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-4">Download Our Mobile App</h2>
+                    <p class="text-lg text-gray-600 mb-6">Get the full KwaMhlanga Eats experience on your phone. Order food and groceries anytime, anywhere.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="flex items-center justify-center px-6 py-3 bg-gray-900 text-white rounded-button whitespace-nowrap">
+                            <div class="w-6 h-6 flex items-center justify-center mr-2">
+                                <i class="ri-apple-fill"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-xs">Download on the</div>
+                                <div class="text-sm font-semibold">App Store</div>
+                            </div>
+                        </button>
+                        <button class="flex items-center justify-center px-6 py-3 bg-gray-900 text-white rounded-button whitespace-nowrap">
+                            <div class="w-6 h-6 flex items-center justify-center mr-2">
+                                <i class="ri-google-play-fill"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-xs">Get it on</div>
+                                <div class="text-sm font-semibold">Google Play</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://readdy.ai/api/search-image?query=A%20smartphone%20displaying%20a%20food%20delivery%20app%20interface%20with%20restaurant%20listings%20and%20a%20shopping%20cart.%20The%20app%20has%20a%20clean%2C%20modern%20design%20with%20food%20images%20visible.%20The%20phone%20is%20held%20in%20a%20hand%20against%20a%20simple%20background.%20The%20screen%20shows%20a%20user-friendly%20interface%20with%20clear%20navigation%20elements&width=400&height=600&seq=11&orientation=portrait" alt="Mobile App" class="max-w-full h-auto rounded-xl shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Become a Partner -->
+    <section class="py-12 bg-primary/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-4">Join KwaMhlanga Eats</h2>
+                <p class="text-lg text-gray-600 mb-8">Partner with us to grow your business and reach more customers in the KwaMhlanga area.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <div class="w-6 h-6 flex items-center justify-center text-primary">
+                                <i class="ri-store-2-line"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Restaurant Owners</h3>
+                        <p class="text-gray-600 mb-4">List your restaurant on our platform and reach more hungry customers.</p>
+                        <button class="w-full px-4 py-2 bg-red-700 text-white rounded-button font-medium whitespace-nowrap">Register Restaurant</button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <div class="w-6 h-6 flex items-center justify-center text-primary">
+                                <i class="ri-shopping-bag-3-line"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Store Owners</h3>
+                        <p class="text-gray-600 mb-4">Sell your products online and expand your customer base.</p>
+                        <button class="w-full px-4 py-2 bg-red-700 text-white rounded-button font-medium whitespace-nowrap">Register Store</button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <div class="w-6 h-6 flex items-center justify-center text-primary">
+                                <i class="ri-bike-line"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Delivery Drivers</h3>
+                        <p class="text-gray-600 mb-4">Join our team of drivers and earn money on your own schedule.</p>
+                        <button class="w-full px-4 py-2 bg-red-700 text-white rounded-button font-medium whitespace-nowrap">Apply as Driver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-['Pacifico'] mb-4">KwaMhlanga Eats</h3>
+                    <p class="text-gray-400 mb-4">Connecting you to the best local food and grocery stores in KwaMhlanga.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
+                            <i class="ri-twitter-x-fill"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">For Partners</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Become a Partner</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Become a Driver</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Partner Login</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Driver Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-gray-400">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <span class="text-gray-400">s'tjugukile Center, KwaMhlanga, 1022</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center mr-2 text-gray-400">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <span class="text-gray-400">+27 12 543 9141 / 072 344 0806</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center mr-2 text-gray-400">
+                                <i class="ri-mail-line"></i>
+                            </div>
+                            <span class="text-gray-400">info@mhlangaeatss.co.za</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 Mhlanga Eatss. All rights reserved.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Terms of Service</a>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 flex items-center justify-center text-gray-400">
+                                <i class="ri-visa-line"></i>
+                            </div>
+                            <div class="w-6 h-6 flex items-center justify-center text-gray-400">
+                                <i class="ri-mastercard-line"></i>
+                            </div>
+                            <div class="w-6 h-6 flex items-center justify-center text-gray-400">
+                                <i class="ri-paypal-line"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Cart Button (Mobile) -->
+    <div class="md:hidden fixed bottom-4 right-4 z-40">
+        <button class="w-14 h-14 bg-primary rounded-full shadow-lg flex items-center justify-center text-white relative">
+            <i class="ri-shopping-cart-2-line ri-lg"></i>
+            <span class="absolute -top-1 -right-1 w-5 h-5 bg-gray-800 text-white text-xs rounded-full flex items-center justify-center">3</span>
+        </button>
     </div>
 
-    <script src="script.js"></script>
+<!-- Modal markup here -->
+  <div 
+    id="loginModal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+  >
+    <div class="bg-white w-11/12 md:w-2/3 lg:w-1/2 h-4/5 rounded-lg overflow-hidden relative">
+      <button
+        id="closeLoginModal"
+        class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+      >&times;</button>
+      <iframe src="login.html" class="w-full h-full border-0"></iframe>
+    </div>
+  </div>
+
+
+    <script id="profileDropdownScript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileButton = document.getElementById('profileButton');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            profileButton.addEventListener('click', function() {
+                profileDropdown.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (!profileButton.contains(event.target) && !profileDropdown.contains(event.target)) {
+                    profileDropdown.classList.add('hidden');
+                }
+            });
+        });
+
+
+const openModalBtn = document.getElementById("openLoginModal");
+    const closeModalBtn = document.getElementById("closeLoginModal");
+    const modal = document.getElementById("loginModal");
+
+    openModalBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+
+
+    </script>
+
+
 </body>
 </html>

@@ -1,3 +1,128 @@
+<<<<<<< HEAD
+<!DOCTYPE >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<<< HEAD:public/login.html
+    <title>MhlagaEatss</title>
+   <!-- <link rel="stylesheet" href="style.css">-->
+	    <script src="./tailwindCSS.js"></script>
+
+========
+    <title>Delivery App - Login & Signup</title>
+    <link rel="stylesheet" href="main.css">
+>>>>>>>> 3c195bb915a087ca4e52da149db2aa3213bb8d5c:public/login_register.html
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> <!-- Updated Font Awesome -->
+</head>
+<body class="bg-transparent min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-md bg-white/30 backdrop-blur-md p-8 rounded-xl shadow-lg flex flex-col items-center space-y-6">
+        <!-- Logo -->
+<<<<<<<< HEAD:public/login.html
+<img src="./assets/img/logo.jpg" alt="Delivery App Logo" class="w-24 h-24 rounded-full object-cover">
+
+        <!-- Login Form --> 
+        <form id="loginForm" target="_top" class="flex flex-col space-y-4 w-full">
+            <input type="text" id="login-username" placeholder="Username" required 
+			  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+             >
+            <input type="password" id="login-password" placeholder="Password" required
+			  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+            >
+            <button type="submit"    class="w-full bg-red-600 text-white font-semibold py-2 rounded-md hover:bg-red-700 transition"
+
+
+			>Login</button  >
+            <p id="message"></p>
+========
+        <img src="assets/logo.jpg" alt="Delivery App Logo" class="logo">
+
+        <!-- Login Form --> 
+        <form id="loginForm">
+            <input type="text" id="login-email" placeholder="email" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p id="login-error-message"></p>
+        </form>
+
+        <!-- Signup Form (Hidden by Default) -->
+ <form id="signupForm" class="hidden flex flex-col space-y-4 w-full">
+      
+		
+  <select id="userRole"  class="w-full  px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+  <option value="">-- Select Role --</option>
+  <option value="customer">Customer</option>
+  <option value="driver">Driver</option>
+  <option value="admin">Strore Manager</option>
+   </select>
+<<<<<<<< HEAD:public/login.html
+		   <input type="text" id="signup-username" placeholder="Username" required
+		    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+            <input type="email" id="signup-email" placeholder="Email" required 
+			 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+            <input type="password" id="signup-password" placeholder="Password" required 
+			 class="w-full  px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+
+
+         <button type="submit"
+		   class="w-full bg-red-600 text-white font-semibold py-2 rounded-md hover:bg-red-700 transition"
+         >Sign Up</button>
+            <p id="message"></p>
+========
+
+
+
+        <div id= "customerForm"  method="post" style="display: none;"> 
+		   <input type="text" id="signup-username" placeholder="Username" required>
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+		</div>
+		
+		<div id="driverForm"  method="post" style="display: none;"> 
+                    <input type="email" id="driver-email" placeholder="Email (for contact)" required />
+                    <input type="text" id="driver-license" placeholder="Driver's License" required />
+                    <input type="text" id="number-plate" placeholder="Number Plate" required />
+        </div>
+		
+		<div id= "storeManangerForm"  method="post" style="display: none;"> 
+			  <input type="email" id="manager-email" placeholder="Email (for contact)" required />
+                    <input type="text" id="store-name" placeholder="Store Name" required />
+                    <input type="text" id="store-location" placeholder="Store Location" required />
+                `	
+		</div>
+
+
+         <button type="submit">Sign Up</button>
+            <p id="signup-error-message"></p>
+>>>>>>>> 3c195bb915a087ca4e52da149db2aa3213bb8d5c:public/login_register.html
+			
+        </form>
+		
+
+        <!-- Social Media Login -->
+        <div class="social-login">
+            <p>Or login with:</p>
+            <button class="google-btn"><i class="fa-brands fa-google"></i></button>
+            <button class="facebook-btn"><i class="fa-brands fa-facebook-f"></i> </button>
+        </div>
+
+        <!-- Toggle Login/Signup -->
+        <p class="toggle-text">
+            Don't have an account? <a href="#" id="toggleSignup" class="text-red-600 hover:underline" >Sign Up</a>
+        </p>
+
+        <!-- Enquiries Section -->
+        <div class="enquiries">
+            <h3><i class="fa-solid fa-question-circle"></i> Need Help?</h3>
+            <p><i class="fa-solid fa-envelope"></i> thatoaphane7@gmail.com</p>
+            <p><i class="fa-solid fa-phone"></i> +27 79 418 2596</p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+=======
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,4 +143,5 @@
     </div>
     <script src="loginScript.js"></script>
   </body>
+>>>>>>> 3c195bb915a087ca4e52da149db2aa3213bb8d5c
 </html>

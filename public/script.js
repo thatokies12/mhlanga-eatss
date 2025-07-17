@@ -22,11 +22,11 @@ document.getElementById("toggleSignup").addEventListener("click", function (even
 // Signup Form Validation
 document.getElementById('signupForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-
+//THATO APHANE
     const username = document.getElementById('signup-username').value.trim();
     const email = document.getElementById('signup-email').value.trim();
     const role = document.getElementById('userRole').value.trim();
-    const password = document.getElementById('signup-password').value.trim();
+    const password = document.getElementById('signup-password').value.trim()
 
     try {
         const res = await fetch('/api/register', {
@@ -79,7 +79,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
             alert(result.message);
             localStorage.setItem("user", JSON.stringify(result.user));
             // Redirect to role-based dashboard
-            window.location.href = result.redirect;
+            window.top.location.href = result.redirect;
         } else {
             alert(result.error || 'Login failed.');
         }
@@ -94,7 +94,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 // Google Login (Placeholder)
 document.querySelector(".google-btn").addEventListener("click", function () {
     alert("Google Login Clicked! (Integration Required)");
-});
+})
 
 // Facebook Login (Placeholder)
 document.querySelector(".facebook-btn").addEventListener("click", function () {
