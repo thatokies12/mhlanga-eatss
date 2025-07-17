@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2025 at 01:19 AM
+-- Generation Time: Jul 17, 2025 at 02:45 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kwamhlanga_eats`
+-- Database: `practice`
 --
 
 -- --------------------------------------------------------
@@ -34,6 +34,14 @@ CREATE TABLE `carts` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `user_id`, `created_at`) VALUES
+(10, 2, '2025-07-17 09:27:46'),
+(11, 2, '2025-07-17 09:35:57');
+
 -- --------------------------------------------------------
 
 --
@@ -45,7 +53,16 @@ CREATE TABLE `cart_items` (
   `cart_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=hp8;
+
+--
+-- Dumping data for table `cart_items`
+--
+
+INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
+(12, 10, 8, 2),
+(13, 11, 5, 1),
+(14, 11, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -66,7 +83,12 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'burgers'),
 (2, 'sandwhitches'),
 (3, 'Staple foods'),
+<<<<<<< HEAD:database/kwamhlanga_eats(1).sql
 (4, 'Chips');
+=======
+(4, 'Chips'),
+(5, 'Kotas');
+>>>>>>> ec32519fd9acd22c11b93b1496997173167ac1c5:database/kwamhlanga_eats (2).sql
 
 -- --------------------------------------------------------
 
@@ -78,9 +100,16 @@ CREATE TABLE `deliveries` (
   `id` int(11) NOT NULL,
   `order_id` int(11) DEFAULT NULL,
   `driver_id` int(11) DEFAULT NULL,
-  `delivery_status` enum('assigned','in_transit','delivered','failed') DEFAULT 'assigned',
-  `delivery_time` datetime DEFAULT NULL
+  `address` text,
+  `delivery_status` enum('ready','out for delivery','delivered','failed') DEFAULT 'ready'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `deliveries`
+--
+
+INSERT INTO `deliveries` (`id`, `order_id`, `driver_id`, `address`, `delivery_status`) VALUES
+(2, 6, NULL, '13 bgf hill', 'ready');
 
 -- --------------------------------------------------------
 
@@ -142,11 +171,29 @@ CREATE TABLE `notifications` (
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
+<<<<<<< HEAD:database/kwamhlanga_eats(1).sql
   `driver_id` int(11) DEFAULT NULL,
   `total_amount` decimal(10,2) DEFAULT NULL,
   `delivery_status` enum('pending','out_for_delivery','delivered') DEFAULT 'pending',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+=======
+  `cart_id` int(11) DEFAULT NULL,
+  `total` decimal(10,2) DEFAULT NULL,
+  `payment_method` varchar(50) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `status` varchar(50) DEFAULT 'pending',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=hp8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_id`, `cart_id`, `total`, `payment_method`, `store_id`, `address`, `status`, `created_at`) VALUES
+(6, 2, 11, '74.98', 'cash', 13, '13 bgf hill', 'ready', '2025-07-17 09:35:58');
+>>>>>>> ec32519fd9acd22c11b93b1496997173167ac1c5:database/kwamhlanga_eats (2).sql
 
 -- --------------------------------------------------------
 
@@ -159,8 +206,17 @@ CREATE TABLE `order_items` (
   `order_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `price` decimal(10,2) DEFAULT NULL,
+  `subtotal` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=hp8;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, `subtotal`) VALUES
+(4, 6, 5, 1, NULL, NULL),
+(5, 6, 7, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,7 +243,13 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `store_id
 (4, 'Pap & Wors', 'Pap with wors and chakalaka salad', '60.00', '1752235452581-images (4).jpeg', 12, 'Staple foods'),
 (5, 'Small boy', '100g beef patty, lettuce, tomato, cheese & caramelized onion', '29.99', '1752236568106-images (12).jpeg', 13, 'burgers'),
 (6, 'CHICKEN BOY', 'chicken breast, lettuce, tomato, cheese & onion', '30.99', '1752236686189-images (15).jpeg', 13, 'burgers'),
+<<<<<<< HEAD:database/kwamhlanga_eats(1).sql
 (7, 'CHILLI CHEESE BOY', '2 x 100g beef patty, onion, cheese, bacon, lettuce', '44.99', '1752236887413-images (13).jpeg', 13, 'burgers');
+=======
+(7, 'CHILLI CHEESE BOY', '2 x 100g beef patty, onion, cheese, bacon, lettuce', '44.99', '1752236887413-images (13).jpeg', 13, 'burgers'),
+(8, 'Sleeze kota', 'Kota with chips, half vienna, half russian, cheese', '27.00', '1752702117432-images (27).jpeg', 15, 'Kotas'),
+(9, 'Sandwich kota', 'Sandwich toast,chips,vienna,russian', '30.00', '1752702388971-images (19).jpeg', 15, 'sandwhitches');
+>>>>>>> ec32519fd9acd22c11b93b1496997173167ac1c5:database/kwamhlanga_eats (2).sql
 
 -- --------------------------------------------------------
 
@@ -209,10 +271,10 @@ CREATE TABLE `stores` (
 --
 
 INSERT INTO `stores` (`id`, `manager_id`, `name`, `location`, `contact_info`, `image`) VALUES
-(10, 10, 'Corners Kitchen', 'KwaMhlanga', '0123456789', '1752070176694.jpg'),
 (12, 10, 'Eziko Kitchen', 'KwaMhlanga', '01456565', '1752070325103.jpg'),
 (13, 10, 'Blac Boy joint', 'KwaMhlanga', '023456789', '1752070385412.jpg'),
-(14, 10, 'Kwa-Vundla', 'KwaMhlanga', '014747025', '1752070609026.jpg');
+(15, 9, 'Kwa-Vundla', 'KwaMhlanga', '0123456789', '1752701648074.jpg'),
+(16, 9, 'Corners Kitchen', 'KwaMhlanga', '2343546', '1752701755354.jpg');
 
 -- --------------------------------------------------------
 
@@ -239,7 +301,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `role`, `password`) VALUES
 (8, 'Bkayz', 'code@tz', 'manager', '$2b$10$SQfv9erv3wKF4WQMQB.zH.DAjt5aixxut7KqVHecn.VPXrO9Is5MK'),
 (9, 'kjay', 'kjay@test', 'manager', '$2b$10$pNiVRWcJHhBKYLKcJnd9.e.DFeA9KAPfzF4Tz44EVklFNtLZWPTV2'),
 (10, 'mkay', 'mak@test', 'manager', '$2b$10$id1SbRLQ3Ai5cf0Zi0QL4eSNUy0LLTsKX/sxmVM3FybExMBaWz6rG'),
-(11, 'temm', 'temm@drive', 'driver', '$2b$10$cLyI2SbCnsQ1sGS1Mw5rtuso9KQZs3sBL2Iv61nO9Ek3vIKkXh5iW');
+(11, 'temm', 'temm@drive', 'driver', '$2b$10$cLyI2SbCnsQ1sGS1Mw5rtuso9KQZs3sBL2Iv61nO9Ek3vIKkXh5iW'),
+(12, 'billy', 'billy@code', 'customer', '$2b$10$olHJ0Vs7tlO2jibxTt1qS..oIsib.6ScVJMinxs5lj2U68/aS1o4G');
 
 --
 -- Indexes for dumped tables
@@ -256,9 +319,7 @@ ALTER TABLE `carts`
 -- Indexes for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cart_id` (`cart_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `categories`
@@ -293,7 +354,11 @@ ALTER TABLE `notifications`
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `customer_id` (`customer_id`),
+<<<<<<< HEAD:database/kwamhlanga_eats(1).sql
   ADD KEY `driver_id` (`driver_id`);
+=======
+  ADD KEY `cart_id` (`cart_id`);
+>>>>>>> ec32519fd9acd22c11b93b1496997173167ac1c5:database/kwamhlanga_eats (2).sql
 
 --
 -- Indexes for table `order_items`
@@ -332,25 +397,29 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
+<<<<<<< HEAD:database/kwamhlanga_eats(1).sql
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+>>>>>>> ec32519fd9acd22c11b93b1496997173167ac1c5:database/kwamhlanga_eats (2).sql
 
 --
 -- AUTO_INCREMENT for table `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `drivers`
@@ -368,31 +437,35 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
+<<<<<<< HEAD:database/kwamhlanga_eats(1).sql
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+>>>>>>> ec32519fd9acd22c11b93b1496997173167ac1c5:database/kwamhlanga_eats (2).sql
 
 --
 -- AUTO_INCREMENT for table `stores`
 --
 ALTER TABLE `stores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -403,13 +476,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `carts`
   ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `cart_items`
---
-ALTER TABLE `cart_items`
-  ADD CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`),
-  ADD CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Constraints for table `deliveries`
@@ -429,7 +495,11 @@ ALTER TABLE `notifications`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`),
+<<<<<<< HEAD:database/kwamhlanga_eats(1).sql
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`driver_id`) REFERENCES `users` (`id`);
+=======
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`);
+>>>>>>> ec32519fd9acd22c11b93b1496997173167ac1c5:database/kwamhlanga_eats (2).sql
 
 --
 -- Constraints for table `order_items`
